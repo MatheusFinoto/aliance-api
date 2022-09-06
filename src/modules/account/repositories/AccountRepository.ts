@@ -18,6 +18,12 @@ export class AccountRepository implements IAccountRepositories {
 		});
 	}
 
+	async findOne(acc_email: string): Promise<IAccount | null> {
+		return prisma.tb_account.findFirst({
+			where: { acc_email, acc_active: true },
+		});
+	}
+
 	async listAll(): Promise<IAccount[]> {
 		return prisma.tb_account.findMany();
 	}

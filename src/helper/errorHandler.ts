@@ -1,22 +1,19 @@
-interface IAppResponse {
+interface IAppError {
 	statusCode: number;
 	result: string;
 	message: string;
-	data?: any;
 }
 
-class AppResponse {
+class AppError {
 	public readonly statusCode: number;
 	public readonly result: string;
 	public readonly message: string;
-	public readonly data?: any;
 
-	constructor({ statusCode = 200, result, message, data }: IAppResponse) {
+	constructor({ statusCode = 500, result, message }: IAppError) {
 		this.statusCode = statusCode;
 		this.result = result;
 		this.message = message;
-		this.data = data;
 	}
 }
 
-export { AppResponse };
+export { AppError };
