@@ -1,5 +1,5 @@
-import "reflect-metadata";
-import "./shared/container";
+import 'reflect-metadata';
+import './shared/container';
 import express from 'express';
 import { router } from './routes';
 
@@ -9,4 +9,4 @@ app.use(express.json());
 
 app.use(router);
 
-app.listen(3333, ()=> console.log("🚀 - server is running"))
+app.listen(3333, () => console.log('🚀 - server is running'));

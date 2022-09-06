@@ -11,7 +11,7 @@ model tb_account {
   acc_id                                         String      @id @db.VarChar(40)
   acc_name                                       String      @db.VarChar(25)
   acc_password                                   String      @db.VarChar(100)
-  acc_salt                                       String      @db.VarChar(25)
+  acc_salt                                       String      @db.VarChar(100)
   acc_email                                      String      @db.VarChar(200)
   acc_created_at                                 DateTime    @db.Timestamp(6)
   acc_image                                      String?     @db.VarChar(25)
