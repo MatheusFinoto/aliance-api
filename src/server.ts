@@ -1,11 +1,12 @@
 import express from 'express';
+import { router } from './routes';
+import "reflect-metadata";
+import "./shared/container";
 
 const app = express();
 
 app.use(express.json());
 
-app.get("/", (request, response)=>{
-    response.json({message:"Ola mundo"});
-});
+app.use(router);
 
 app.listen(3333, ()=> console.log("🚀 - server is running"))
