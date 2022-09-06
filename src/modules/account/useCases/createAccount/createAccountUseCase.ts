@@ -1,10 +1,9 @@
 import { IEncryptProvider } from 'src/shared/container/providers/encryptProvider/iEncryptProvider';
 import { IUuidProvider } from 'src/shared/container/providers/uuidProvider/iUuidProvider';
 import { inject, injectable } from 'tsyringe';
-import { AppResponse } from '../../../../helper/responseParse';
 import { AppError } from '../../../../helper/errorHandler';
-
-import { IAccountRepositories } from '../../iRepostories/IAccountRepostories';
+import { AppResponse } from '../../../../helper/responseParse';
+import { IAccountRepositories } from '../../iRepositories/IAccountRepositories';
 
 interface ICreateRequest {
 	acc_name: string;
@@ -56,7 +55,7 @@ class CreateAccountUseCase {
 			acc_created_at: new Date(),
 		});
 		return new AppResponse({
-			result: 'sucess',
+			result: 'success',
 			message: 'Conta criada com sucesso',
 			data: accountCreate,
 			statusCode: 200,
