@@ -20,8 +20,8 @@ class CreateAccountUseCase{
     async execute({acc_name,acc_email, acc_password }:ICreateRequest):Promise<AppResponse>{
         
         const accountCreate = await this.accountRepository.create({acc_id:this.uuidProvider.createUUID(), acc_name, acc_password, acc_salt: "123123", acc_email, acc_created_at: new Date()});
-
-        return new AppResponse({result: "sucess", message:"Conta criada com sucesso", data:accountCreate});
+//chasodajhsjhjcj
+        return new AppResponse({result: "sucess", message:"Conta criada com sucesso", data:accountCreate , statusCode:200});
     }
 }
 
