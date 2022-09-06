@@ -1,8 +1,8 @@
 import prisma from "../../../libs/prismaClient";
 import { IAccount, IAccountCreate } from "../dtos/Account";
-import { IAccountRepostories } from "../iRepostories/IAccountRepostories";
+import { IAccountRepositories } from "../iRepostories/IAccountRepostories";
 
-export class AccountRepository implements IAccountRepostories{
+export class AccountRepository implements IAccountRepositories{
     async create(props: IAccountCreate): Promise<IAccount> {
         return prisma.tb_account.create({data:props});
     }

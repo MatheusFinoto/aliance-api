@@ -13,7 +13,7 @@ class AppResponse {
    public readonly message:string;
    public readonly data?:any;
 
-   constructor({statusCode =200, result, message, data,}){
+   constructor({statusCode =200, result, message, data}: IAppResponse){
     this.statusCode = statusCode, this.result = result, this.message = message, this.data = data
    }
 }
