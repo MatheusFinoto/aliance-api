@@ -1,6 +1,6 @@
-import { IEncryptProvider } from 'src/shared/container/providers/encryptProvider/iEncryptProvider';
 import { IUuidProvider } from 'src/shared/container/providers/uuidProvider/iUuidProvider';
 import { inject, injectable } from 'tsyringe';
+import { IEncryptProvider } from '../../../../shared/container/providers/encryptProvider/iEncryptProvider';
 import { AppError } from '../../../../helper/errorHandler';
 import { AppResponse } from '../../../../helper/responseParse';
 import { IAccountRepositories } from '../../iRepositories/IAccountRepositories';
@@ -26,6 +26,22 @@ class CreateAccountUseCase {
 		acc_password,
 		acc_password_confirm,
 	}: ICreateRequest): Promise<AppResponse> {
+		// const regexValidation = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.exec(
+		// 	acc_email
+		// );
+
+		// console.log(regexValidation);
+
+		const regex = /\S+@\S+.\S+/;
+
+		if (!regex.test(acc_email)) {
+			throw new AppError({
+				message: 'E-mail Inválido',
+				result: 'error',
+				statusCode: 400,
+			});
+		}
+
 		if (acc_password !== acc_password_confirm) {
 			throw new AppError({
 				message: 'Senhas não conferem',
@@ -34,11 +50,13 @@ class CreateAccountUseCase {
 			});
 		}
 
-		const accoutAlreadyExists = await this.accountRepository.findOne(acc_email);
+		const accountAlreadyExists = await this.accountRepository.findOne(
+			acc_email
+		);
 
-		if (accoutAlreadyExists) {
+		if (accountAlreadyExists) {
 			throw new AppError({
-				message: 'Usuario ja Cadastrado com esse email',
+				message: 'Usuário ja cadastrado com esse email',
 				result: 'error',
 				statusCode: 400,
 			});

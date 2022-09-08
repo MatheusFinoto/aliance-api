@@ -20,3 +20,13 @@ export interface IAccountCreate {
 	acc_image?: string;
 	acc_country?: string;
 }
+export interface IAccountUpdate {
+	acc_id: string;
+	acc_name: string;
+	// acc_password: string;
+	// acc_salt: string;
+	acc_email: string;
+	// acc_created_at: Date;
+	acc_image: string;
+	acc_country: string;
+}

@@ -1,5 +1,5 @@
 import prisma from '../../../libs/prismaClient';
-import { IAccount, IAccountCreate } from '../dtos/Account';
+import { IAccount, IAccountCreate, IAccountUpdate } from '../dtos/Account';
 import { IAccountRepositories } from '../iRepositories/IAccountRepositories';
 
 export class AccountRepository implements IAccountRepositories {
@@ -24,15 +24,43 @@ export class AccountRepository implements IAccountRepositories {
 		});
 	}
 
-	async listAll(): Promise<IAccount[]> {
-		return prisma.tb_account.findMany();
+	async listAll(page: number, limit: number): Promise<IAccount[]> {
+		return prisma.tb_account.findMany({
+			skip: page * limit,
+			take: limit,
+			select: {
+				acc_id: true,
+				acc_name: true,
+				acc_email: true,
+				acc_created_at: true,
+				acc_image: true,
+				acc_country: true,
+				acc_active: true,
+			},
+			where: { acc_active: true },
+			orderBy: {
+				acc_created_at: 'asc',
+			},
+		});
 	}
 
-	async update(): Promise<IAccount> {
-		throw new Error('Method not implemented.');
+	async update(props: IAccountUpdate): Promise<IAccount> {
+		return prisma.tb_account.update({
+			where: { acc_id: props.acc_id },
+			data: {
+				acc_email: props.acc_email,
+				acc_name: props.acc_name,
+				acc_image: props.acc_image,
+				acc_country: props.acc_country,
+			},
+		});
 	}
 
 	async delete(acc_id: string): Promise<void> {
 		throw new Error('Method not implemented.');
+	}
+
+	async findById(acc_id: string): Promise<IAccount | null> {
+		return prisma.tb_account.findUnique({ where: { acc_id } });
 	}
 }

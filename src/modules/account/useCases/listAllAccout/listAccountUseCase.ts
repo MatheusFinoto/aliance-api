@@ -1,6 +1,11 @@
-import { IAccountRepositories } from '../../iRepositories/IAccountRepositories';
 import { inject, injectable } from 'tsyringe';
 import { AppResponse } from '../../../../helper/responseParse';
+import { IAccountRepositories } from '../../iRepositories/IAccountRepositories';
+
+interface IExecListAccount {
+	page: number;
+	limit: number;
+}
 
 @injectable()
 class ListAccountUseCase {
@@ -8,8 +13,14 @@ class ListAccountUseCase {
 		@inject('AccountRepository') private accountRepository: IAccountRepositories
 	) {}
 
-	async execute(): Promise<AppResponse> {
-		const listAccounts = await this.accountRepository.listAll();
+	async execute({
+		page = 0,
+		limit = 999999999999,
+	}: IExecListAccount): Promise<AppResponse> {
+		const listAccounts = await this.accountRepository.listAll(
+			page,
+			limit || 999999999999
+		);
 
 		return new AppResponse({
 			result: 'success',
