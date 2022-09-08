@@ -31,7 +31,7 @@
           // "@modules/": ["./src/modules/"],
           // "@shared/": ["./src/shared/"],
           // "@utils/": ["./src/utils/"],
-          "@providers/": ["./src/shared/container/providers/"]
+          "@providers/*": ["./src/shared/container/providers/*"]
       }
   },
   "include": ["./src/*/"],
