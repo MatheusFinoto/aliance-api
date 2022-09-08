@@ -18,7 +18,6 @@ export interface IEventCreate {
 	eve_image: string;
 	eve_description: string;
 	eve_date: Date;
-	eve_active: boolean;
 	eve_updated_at?: Date | null;
 	eve_created_by: string;
 	eve_updated_by?: string | null;
