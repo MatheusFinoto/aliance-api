@@ -53,6 +53,15 @@ export class AccountRepository implements IAccountRepositories {
 				acc_image: props.acc_image,
 				acc_country: props.acc_country,
 			},
+			select: {
+				acc_id: true,
+				acc_email: true,
+				acc_name: true,
+				acc_image: true,
+				acc_country: true,
+				acc_created_at: true,
+				acc_active: true,
+			},
 		});
 	}
 

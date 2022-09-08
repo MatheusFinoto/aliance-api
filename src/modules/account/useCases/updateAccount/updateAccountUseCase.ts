@@ -34,11 +34,17 @@ class UpdateAccountUseCase {
 			});
 		}
 
-		const accountUpdated = {};
+		const accountUpdated = await this.accountRepository.update({
+			acc_id,
+			acc_name,
+			acc_country,
+			acc_email,
+			acc_image,
+		});
 
 		return new AppResponse({
 			result: 'success',
-			message: 'Conta criada com sucesso',
+			message: 'Conta alterada com sucesso',
 			data: accountUpdated,
 			statusCode: 200,
 		});
