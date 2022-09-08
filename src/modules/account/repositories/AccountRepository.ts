@@ -24,7 +24,11 @@ export class AccountRepository implements IAccountRepositories {
 		});
 	}
 
-	async listAll(page: number, limit: number): Promise<IAccount[]> {
+	async listAll(
+		page: number,
+		limit: number,
+		country: string
+	): Promise<IAccount[]> {
 		return prisma.tb_account.findMany({
 			skip: page * limit,
 			take: limit,
@@ -37,7 +41,7 @@ export class AccountRepository implements IAccountRepositories {
 				acc_country: true,
 				acc_active: true,
 			},
-			where: { acc_active: true },
+			where: { acc_active: true, acc_country: { contains: country } },
 			orderBy: {
 				acc_created_at: 'asc',
 			},
@@ -66,7 +70,12 @@ export class AccountRepository implements IAccountRepositories {
 	}
 
 	async delete(acc_id: string): Promise<void> {
-		throw new Error('Method not implemented.');
+		await prisma.tb_account.update({
+			where: { acc_id },
+			data: {
+				acc_active: false,
+			},
+		});
 	}
 
 	async findById(acc_id: string): Promise<IAccount | null> {

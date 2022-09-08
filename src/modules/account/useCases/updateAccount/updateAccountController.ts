@@ -8,6 +8,7 @@ class UpdateAccountController {
 		const { acc_name, acc_email, acc_image, acc_country } = request.body;
 
 		const updateAccountUseCase = container.resolve(UpdateAccountUseCase);
+
 		const updateAccount = await updateAccountUseCase.execute({
 			acc_id,
 			acc_name,
