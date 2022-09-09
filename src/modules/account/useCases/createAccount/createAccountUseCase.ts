@@ -26,17 +26,23 @@ class CreateAccountUseCase {
 		acc_password,
 		acc_password_confirm,
 	}: ICreateRequest): Promise<AppResponse> {
-		// const regexValidation = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.exec(
-		// 	acc_email
-		// );
+		//! E-MAIL VALIDATION
+		const regexEmail = /\S+@\S+.\S+/;
 
-		// console.log(regexValidation);
-
-		const regex = /\S+@\S+.\S+/;
-
-		if (!regex.test(acc_email)) {
+		if (!regexEmail.test(acc_email)) {
 			throw new AppError({
 				message: 'E-mail Inválido',
+				result: 'error',
+				statusCode: 400,
+			});
+		}
+
+		//! PASSWORD VALIDATION
+		const regexPassword =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+		if (!regexPassword.test(acc_password)) {
+			throw new AppError({
+				message: 'Senha Fraca',
 				result: 'error',
 				statusCode: 400,
 			});
