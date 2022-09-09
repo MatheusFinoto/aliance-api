@@ -1,3 +1,5 @@
+import { IEventImage } from '../../eventsImages/dtos/EventsImages';
+
 export interface IEvent {
 	eve_id: string;
 	eve_title: string;
@@ -32,6 +34,7 @@ export interface IEventList {
 	tb_account_tb_accountTotb_events_eve_created_by: {
 		acc_name: string;
 	};
+	tb_events_images: IEventImage[];
 }
 
 export interface IEventUpdate {

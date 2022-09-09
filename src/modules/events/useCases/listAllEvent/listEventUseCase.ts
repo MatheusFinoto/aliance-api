@@ -35,6 +35,7 @@ class ListEventUseCase {
 				acc_name:
 					event.tb_account_tb_accountTotb_events_eve_created_by.acc_name,
 			},
+			eve_images: event.tb_events_images,
 		}));
 
 		return new AppResponse({

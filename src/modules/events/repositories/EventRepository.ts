@@ -36,6 +36,11 @@ export class EventRepository implements IEventRepositories {
 						acc_name: true,
 					},
 				},
+				tb_events_images: {
+					select: {
+						eve_img_link: true,
+					},
+				},
 			},
 			where: { eve_active: true },
 			orderBy: {
@@ -55,6 +60,7 @@ export class EventRepository implements IEventRepositories {
 				eve_updated_by: props.eve_updated_by,
 				eve_updated_at: props.eve_updated_at,
 			},
+
 			select: {
 				eve_id: true,
 				eve_title: true,
@@ -64,6 +70,11 @@ export class EventRepository implements IEventRepositories {
 				tb_account_tb_accountTotb_events_eve_created_by: {
 					select: {
 						acc_name: true,
+					},
+				},
+				tb_events_images: {
+					select: {
+						eve_img_link: true,
 					},
 				},
 			},
