@@ -1,5 +1,3 @@
-DDL BANCO
-
 CREATE TABLE aliance_db.public.tb_events (
 eve_id varchar(40) NOT NULL,
 eve_title varchar(100) NOT NULL,
@@ -63,6 +61,7 @@ PRIMARY KEY (med_id)
 );
 
 ALTER TABLE public.tb_events
+
 ADD FOREIGN KEY (eve_created_by)
 REFERENCES public.tb_account (acc_id);
 

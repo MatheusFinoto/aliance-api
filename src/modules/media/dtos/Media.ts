@@ -18,3 +18,12 @@ export interface IMediaCreate {
 	med_image: string;
 	med_description?: string | null;
 }
+
+export interface IMediaUpdate {
+	med_id: string;
+	med_title: string;
+	med_type: number;
+	med_link: string;
+	med_image: string;
+	med_description: string | null;
+}

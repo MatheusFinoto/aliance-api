@@ -11,14 +11,13 @@ model tb_account {
   acc_id                                         String      @id @db.VarChar(40)
   acc_name                                       String      @db.VarChar(25)
   acc_password                                   String      @db.VarChar(100)
-  acc_salt                                       String      @db.VarChar(25)
+  acc_salt                                       String      @db.VarChar(100)
   acc_email                                      String      @db.VarChar(200)
   acc_created_at                                 DateTime    @db.Timestamp(6)
   acc_image                                      String?     @db.VarChar(25)
   acc_country                                    String?     @db.VarChar(25)
   acc_active                                     Boolean     @default(true)
   tb_events_tb_accountTotb_events_eve_created_by tb_events[] @relation("tb_accountTotb_events_eve_created_by")
-  tb_events_tb_accountTotb_events_eve_updated_by tb_events[] @relation("tb_accountTotb_events_eve_updated_by")
 }
 
 model tb_events {
@@ -33,7 +32,6 @@ model tb_events {
   eve_created_by                                  String             @db.VarChar(40)
   eve_updated_by                                  String?            @db.VarChar(40)
   tb_account_tb_accountTotb_events_eve_created_by tb_account         @relation("tb_accountTotb_events_eve_created_by", fields: [eve_created_by], references: [acc_id], onDelete: NoAction, onUpdate: NoAction)
-  tb_account_tb_accountTotb_events_eve_updated_by tb_account?        @relation("tb_accountTotb_events_eve_updated_by", fields: [eve_updated_by], references: [acc_id], onDelete: NoAction, onUpdate: NoAction)
   tb_events_images                                tb_events_images[]
 }
 
