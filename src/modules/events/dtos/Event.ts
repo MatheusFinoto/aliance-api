@@ -33,3 +33,13 @@ export interface IEventList {
 		acc_name: string;
 	};
 }
+
+export interface IEventUpdate {
+	eve_id: string;
+	eve_title: string;
+	eve_image: string;
+	eve_description: string;
+	eve_date: Date;
+	eve_updated_at: Date | null;
+	eve_updated_by: string | null;
+}

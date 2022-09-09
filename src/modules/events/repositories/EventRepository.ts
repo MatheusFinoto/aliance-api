@@ -1,5 +1,5 @@
 import prisma from '../../../libs/prismaClient';
-import { IEvent, IEventCreate, IEventList } from '../dtos/Event';
+import { IEvent, IEventCreate, IEventList, IEventUpdate } from '../dtos/Event';
 import { IEventRepositories } from '../iRepositories/IEventRepositories';
 
 export class EventRepository implements IEventRepositories {
@@ -44,8 +44,30 @@ export class EventRepository implements IEventRepositories {
 		});
 	}
 
-	async update(): Promise<IEvent> {
-		throw new Error('Method not implemented.');
+	async update(props: IEventUpdate): Promise<IEventList> {
+		return prisma.tb_events.update({
+			where: { eve_id: props.eve_id },
+			data: {
+				eve_title: props.eve_title,
+				eve_image: props.eve_image,
+				eve_description: props.eve_description,
+				eve_date: props.eve_date,
+				eve_updated_by: props.eve_updated_by,
+				eve_updated_at: props.eve_updated_at,
+			},
+			select: {
+				eve_id: true,
+				eve_title: true,
+				eve_image: true,
+				eve_description: true,
+				eve_date: true,
+				tb_account_tb_accountTotb_events_eve_created_by: {
+					select: {
+						acc_name: true,
+					},
+				},
+			},
+		});
 	}
 
 	async delete(eve_id: string): Promise<void> {
