@@ -1,6 +1,6 @@
 import { IUuidProvider } from 'src/shared/container/providers/uuidProvider/iUuidProvider';
 import { inject, injectable } from 'tsyringe';
-// import { AppError } from '../../../../helper/errorHandler';
+import { AppError } from '../../../../helper/errorHandler';
 import { AppResponse } from '../../../../helper/responseParse';
 import { IEventRepositories } from '../../iRepositories/IEventRepositories';
 
@@ -26,6 +26,18 @@ class CreateEventUseCase {
 		eve_date,
 		eve_created_by,
 	}: ICreateRequest): Promise<AppResponse> {
+		const eventAlreadyExists = await this.eventRepository.findByTitle(
+			eve_title
+		);
+
+		if (eventAlreadyExists) {
+			throw new AppError({
+				message: 'Evento já cadastrado com esse titulo',
+				result: 'error',
+				statusCode: 400,
+			});
+		}
+
 		const eventCreate = await this.eventRepository.create({
 			eve_id: this.uuidProvider.createUUID(),
 			eve_title,
@@ -38,7 +50,7 @@ class CreateEventUseCase {
 
 		return new AppResponse({
 			result: 'success',
-			message: 'Conta criada com sucesso',
+			message: 'Evento criado com sucesso',
 			data: eventCreate,
 			statusCode: 200,
 		});

@@ -48,11 +48,22 @@ export class EventRepository implements IEventRepositories {
 		throw new Error('Method not implemented.');
 	}
 
-	async delete(): Promise<void> {
-		throw new Error('Method not implemented.');
+	async delete(eve_id: string): Promise<void> {
+		await prisma.tb_events.update({
+			where: { eve_id },
+			data: {
+				eve_active: false,
+			},
+		});
 	}
 
 	async findById(eve_id: string): Promise<IEvent | null> {
-		throw new Error('Method not implemented.');
+		return prisma.tb_events.findUnique({ where: { eve_id } });
+	}
+
+	async findByTitle(eve_title: string): Promise<IEvent | null> {
+		return prisma.tb_events.findFirst({
+			where: { eve_title, eve_active: true },
+		});
 	}
 }
